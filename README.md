@@ -9,10 +9,11 @@
 -----------------
 ## docker-registry pod&svc 설치 및 설정 과정
   1. docker-registry.yaml 만들기(위의 파일 이용)
-    ```
-    # yaml 파일 생성 후 아래의 명령어로 pod 및 svc 설치 진행 
+    
+  ```
+  # yaml 파일 생성 후 아래의 명령어로 pod 및 svc 설치 진행 
     kubectl apply -f docker-registry.yaml
-    ```
+  ```
   2. 저장소 관련 설정
   ```
    vi /etc/docker/daemon.json
