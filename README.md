@@ -1,11 +1,26 @@
 # Kubernetes_K8
-Prac_Kubernetes
---------------------
+### Prac_Kubernetes
+--------------
 ## 설치 환경
   * Kubernetes 1.19.0
     * 1 Master Node, 1 Worker Node 
   * Nuclio 1.6.30
   * Docker 1:20.10.8
+-----------------
+## docker-registry pod&svc 설치 및 설정 과정
+  1. docker-registry.yaml 만들기(위의 파일 이용)
+    ```
+    # yaml 파일 생성 후 아래의 명령어로 pod 및 svc 설치 진행 
+    kubectl apply -f docker-registry.yaml
+    ```
+  2. 저장소 관련 설정
+  ```
+   vi /etc/docker/daemon.json
+   "insecure-registries" : ["docker-registry.com:30500"]
+   
+   vi /etc/hosts
+   192.168.56.31 docker-registry.com
+  ```
 -----------------
 ## Nuclio 설치 과정
   1. 필요 도구 설치
