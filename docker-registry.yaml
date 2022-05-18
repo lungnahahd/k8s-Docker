@@ -1,0 +1,38 @@
+# vi docker-registry.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: docker-registry
+  labels:
+    app: docker-registry #label
+spec:
+  #nodeName: kube-node2 #node를 지정해도되고 안해도됨
+  #nodeSelector: // node labels를 지정해도 됨
+    #kubernetes.io/hostname: kube-node2
+  containers:
+  - name: docker-registry
+    image: registry:2.7.1
+    ports:
+    - containerPort: 5000 #registry 기본 port
+    volumeMounts:
+    - mountPath: /var/lib/registry #container directory
+      name: host-path #아래에 volumes name
+  volumes: #host pc volume생성
+  - name: host-path
+    hostPath:
+      path: /docker-registry
+      type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-registry
+spec:
+  type: NodePort
+  selector:
+    app: docker-registry
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30500
