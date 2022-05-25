@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station
+spec:
+  selector:
+    matchLabels:
+      app: station
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: station
+    spec:
+      containers:
+      - name: station
+        image: 생성을 원하는 이미지 명
+        ports:
+        - containerPort: 5000
+          name: flask-port
+        command: ["/bin/sh", "-ec", "while : ; do echo '.'; sleep 5 ; done"]
+      imagePullSecrets:
+      - name: mydocker
