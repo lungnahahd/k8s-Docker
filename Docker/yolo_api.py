@@ -20,7 +20,7 @@ def save_image(file):
 
 @app.route('/')
 def web():
-    return "Hyun Do's flask test page"
+    return "'s flask test page"
 
 
 
@@ -44,10 +44,14 @@ def predict():
         
         if check:
             answer = "Safe"
-        
+
+        name = file.filename
+
         res = {
-            'answer' : answer
+            'answer' : answer,
+            'name'   : name
         }
+        os.remove('./temp/'+file.filename)
 
         return res
 
