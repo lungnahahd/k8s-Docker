@@ -1,6 +1,9 @@
 import requests
 import os
 import json
+import time
+
+start = time.time()
 
 def send_data(url):
     path_dir = '/root/pi'
@@ -17,6 +20,9 @@ def send_data(url):
             os.system("mv /root/pi/" + name + " /root/web" )
         else:
             os.system("rm -f /root/pi/"+ name)
+    
+    
+    print("\nend time =", time.time()-start)
     return "Done"
 
 url = "http://192.168.56.31:32735/predict"
