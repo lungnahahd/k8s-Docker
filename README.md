@@ -1,7 +1,7 @@
-# Kubernetes_K8
+# k8s-Docker
 ### Prac_Kubernetes
 --------------
-## 설치 환경
+## Kubernetes 설치 환경
   * Kubernetes 1.19.0
     * 1 Master Node, 1 Worker Node 
   * Nuclio 1.6.30
@@ -68,3 +68,38 @@
       # 대시 보드 노드 포트로 expose -> 노드의 ip와 포트 번호를 이용해서 클러스터 외부에서 대시 보드 접근 가능
       kubectl expose deployment -n nuclio nuclio-dashboard --type=NodePort --name=nuclio-nodeport
       ```
+      -----
+      ## Docker 설치 (with Ubuntu)
+      1. Set up the repository
+      ```
+      sudo apt-get update
+      sudo apt-get upgrade
+      ```
+      2. Prerequisite package 설치
+      ```
+      sudo apt-get install \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
+      ```
+      3. Docker GPG key 추가
+      ```
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+      ```
+      4. stable 버전의 repository 설정
+      ```
+      echo \
+        "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      ```
+     5. Docker 엔진 설치
+     ```
+     sudo apt-get update
+     sudo apt-get install docker-ce docker-ce-cli containerd.io
+     ```
+     6. 정상 설치 확인
+     ```
+     sudo docker run hello-world
+     ```
